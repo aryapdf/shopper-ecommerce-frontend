@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
+import { useParams } from "react-router-dom";
+import Breadcrum from "../component/breadcrums/Breadcrum";
+import ProductDisplay from "../component/productdisplay/ProductDisplay";
+import DescriptionBox from "../component/descriptionBox/DescriptionBox";
+import RelatedProducts from "../component/relatedproducts/RelatedProducts";
 
 const Product = () => {
+  const { all_product } = useContext(ShopContext);
+  const { productId } = useParams();
+  const product = all_product.find((e) => e.id === Number(productId));
   return (
-    <div>Product</div>
-  )
-}
+    <div>
+      <Breadcrum product={product} />
+      <ProductDisplay product={product} />
+      <DescriptionBox />
+      <RelatedProducts />
+    </div>
+  );
+};
 
-export default Product
+export default Product;
